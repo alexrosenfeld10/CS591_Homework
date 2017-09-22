@@ -12,11 +12,29 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/alexrosenfeld10/.android/build-cache/148ff7a17a7c9d18e93331417563c94db1769c18/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="/Users/alexrosenfeld10/AndroidStudioProjects/CS591_Homework/HW03/FourthGradeFlashCard/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_026013d3a606efe8ff382429d2cb6ca65cf0fe2e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/alexrosenfeld10/.android/build-cache/137b64fa2c2a71f82fdfbdb8001b1f8788f8b7dd/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.1"
+        sha1="e03f47f3d1017a093bb3239d4ec47c3447f40744">
+        <dex dex="/Users/alexrosenfeld10/AndroidStudioProjects/CS591_Homework/HW03/FourthGradeFlashCard/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2afb567c4fbd289a0e9199cbad9ee138f5695451/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/alexrosenfeld10/AndroidStudioProjects/CS591_Homework/HW03/FourthGradeFlashCard/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="26.0.1"
-        sha1="d3517b1439a267e62c16464241d1f8fcb44311b6">
+        sha1="403e5e5c7f54c85e51c456edcf110b2f7ccda4d3">
         <dex dex="/Users/alexrosenfeld10/AndroidStudioProjects/CS591_Homework/HW03/FourthGradeFlashCard/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_6caa3a6c76097b2011eb7055190dbffbbddbf168/classes.dex" />
     </item>
 

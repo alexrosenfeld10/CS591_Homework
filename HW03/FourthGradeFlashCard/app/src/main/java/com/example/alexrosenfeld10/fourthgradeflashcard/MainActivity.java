@@ -26,12 +26,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String userName;
+        Bundle bundle = getIntent().getExtras();
+        userName = bundle.getString("userName");
+
+        Toast.makeText(MainActivity.this, "Welcome " + userName, Toast.LENGTH_LONG).show();
         setupQuestion();
     }
 
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        edtQuotient.setText(savedInstanceState.getString("currentAnswer"));
+        numCorrect = savedInstanceState.getInt("numCorrect");
+        numQuestions = savedInstanceState.getInt("numQuestions");
+        txtDividend.setText(savedInstanceState.getString("dividend"));
+        txtDivisor.setText(savedInstanceState.getString("divisor"));
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // Current score, which question, editText
+        outState.putString("currentAnswer", edtQuotient.getText().toString());
+        outState.putInt("numCorrect", numCorrect);
+        outState.putInt("numQuestions", numQuestions);
+        outState.putString("dividend", txtDividend.getText().toString());
+        outState.putString("divisor", txtDivisor.getText().toString());
+
+        super.onSaveInstanceState(outState);
+    }
     /* View editing helper functions */
 
-    public void resetQuestion(View v){
+    public void resetQuestion(View v) {
 
         checkAnswer();
 
@@ -39,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (numQuestions == 10) {
             String message = "You got " + numCorrect + " correct!";
-            Toast toast = Toast.makeText(getBaseContext(), message , Toast.LENGTH_LONG);
+            Toast toast = Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG);
             toast.show();
             numQuestions = 0; // let the user keep going
             numCorrect = 0; // reset correct count
@@ -56,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         txtDividend = (TextView) findViewById(R.id.txtDividend);
         txtDivisor = (TextView) findViewById(R.id.txtDivisor);
 
-        int newDivisor = random.nextInt(50 - 1);
+        int newDivisor = random.nextInt(50 - 1) + 1;
         txtDivisor.setText(Integer.toString(newDivisor));
         int newDividend = generateDividendFor(newDivisor);
         txtDividend.setText(Integer.toString(newDividend));
@@ -73,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         // this way, quotient = 1
         for (int i = 0; i < 500; i++) {
             int newDividend = divisor * (random.nextInt(50 - 1) + 1);
-            if (newDividend <= 100){
+            if (newDividend <= 100) {
                 return newDividend;
             }
         }

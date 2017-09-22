@@ -12,7 +12,7 @@
         android:layout_height="44dp"
         android:ems="10"
         android:inputType="numberSigned"
-        app:layout_constraintRight_toLeftOf="@+id/btnSubmit"
+        app:layout_constraintRight_toLeftOf="@+id/btnSubmitLogin"
         tools:layout_constraintRight_creator="1"
         android:layout_marginEnd="10dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/txtYourAnswer"
@@ -36,7 +36,7 @@
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
-        android:id="@+id/btnSubmit"
+        android:id="@+id/btnSubmitLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SUBMIT"
@@ -69,7 +69,7 @@
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
         android:layout_marginStart="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSubmit"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSubmitLogin"
         android:layout_marginEnd="2dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="109dp"
