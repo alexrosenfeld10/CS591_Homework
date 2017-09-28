@@ -1,0 +1,1 @@
+CS591HW4Jake, Alex, Gijung(Tony), WilliamChapter 31)	We must import View.OnClickListener2)	onClick3)	addView4)	Y.this5)	X.this6)	getWindowManager().getDefaultDisplay().getSize( size )7)	Context8)	setRowCount9)	setContentView10)	  Button b = new Button ( this );11)	  LayoutParams12)	 setGravity
