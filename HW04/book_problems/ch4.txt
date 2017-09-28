@@ -5,6 +5,6 @@
 5. android.content
 6. startActivity
 7. onRestart
-8. 
+8. onCreate, onStart, and onResume (in that order)
 9. 
 10. 
