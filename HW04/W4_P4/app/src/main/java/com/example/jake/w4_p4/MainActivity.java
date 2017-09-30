@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button newGameButton;
 
     private char[] letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-    private Button[] letterButtons;
+    private Button[] letterButtons = new Button[26];
     private boolean firstGame = true;
 
     @Override
@@ -38,11 +38,19 @@ public class MainActivity extends AppCompatActivity {
         letterRow4 = (LinearLayout) findViewById(R.id.letterRow4);
         newGameButton = (Button) findViewById(R.id.newGameButton);
 
+        newGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setUpNewGame();
+            }
+        });
+
         if (firstGame) {
-            int letterCount = 1;
+            int letterCount = 0;
             for (char letter : letters) {
                 final Button b = new Button(this);
-                b.setId(View.generateViewId());
+                b.setTag(String.valueOf(letter));
+                b.setSaveEnabled(true);
 
                 LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 p.width = 120;
@@ -60,15 +68,16 @@ public class MainActivity extends AppCompatActivity {
                 };
                 b.setOnClickListener(letterClickListener);
 
-                if (letterCount <= 7) {
+                if (letterCount < 7) {
                     letterRow1.addView(b);
-                } else if (letterCount <= 14) {
+                } else if (letterCount < 14) {
                     letterRow2.addView(b);
-                } else if (letterCount <= 21) {
+                } else if (letterCount < 21) {
                     letterRow3.addView(b);
                 } else {
                     letterRow4.addView(b);
                 }
+                letterButtons[letterCount] = b;
                 letterCount++;
             }
             //setUpNewGame();
@@ -76,23 +85,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        for (Button b : letterButtons) {
+            b.setEnabled(savedInstanceState.getBoolean((String) b.getTag()));
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        for (Button b : letterButtons) {
+            outState.putBoolean((String) b.getTag(), b.isEnabled());
+        }
+        super.onSaveInstanceState(outState);
+    }
+
     private void setUpNewGame() {
         for (Button b : letterButtons) {
             b.setEnabled(true);
         }
     }
-
-/*    private class LetterOnClickListener implements View.OnClickListener {
-        char letter;
-
-        public LetterOnClickListener(char letter) {
-            this.letter = letter;
-        }
-
-        @Override
-        public void onClick(View v) {
-            v.setEnabled(false);
-        }
-    }*/
 
 }
