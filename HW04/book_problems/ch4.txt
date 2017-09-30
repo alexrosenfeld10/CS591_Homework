@@ -6,5 +6,5 @@
 6. startActivity
 7. onRestart
 8. onCreate, onStart, and onResume (in that order)
-9. 
-10. 
+9. onPause
+10. Yes, for example by each accessing a public static instance variable from another class
