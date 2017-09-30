@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.5"
-        android:padding="15dp"
+        android:padding="10dp"
         android:text="P L A C E H O L D E R"
         android:textAlignment="center"
         android:textColor="@android:color/holo_red_light"
@@ -56,6 +56,14 @@
         android:orientation="horizontal"></LinearLayout>
 
     <LinearLayout
+        android:id="@+id/letterRow3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal"></LinearLayout>
+
+    <LinearLayout
         android:id="@+id/letterRow4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -64,14 +72,6 @@
         android:orientation="horizontal">
 
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/letterRow3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal"></LinearLayout>
 
     <Space
         android:layout_width="match_parent"
