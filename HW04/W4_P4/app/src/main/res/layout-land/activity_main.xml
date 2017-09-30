@@ -103,6 +103,7 @@
             android:paddingTop="15dp"
             android:text="P L A C E H O L D E R"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_red_light"
             android:textSize="26sp" />
     </LinearLayout>
 

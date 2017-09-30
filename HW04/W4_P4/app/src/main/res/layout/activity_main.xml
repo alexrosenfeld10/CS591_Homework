@@ -12,28 +12,30 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
+        android:padding="10dp"
         app:srcCompat="@drawable/hangman_0" />
 
     <TextView
         android:id="@+id/wordView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:padding="5dp"
+        android:layout_weight="1.5"
+        android:padding="15dp"
         android:text="P L A C E H O L D E R"
         android:textAlignment="center"
-        android:textSize="25sp" />
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/chooseMsg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:fontFamily="sans-serif-condensed"
         android:padding="10dp"
         android:text="CHOOSE A LETTER:"
         android:textAlignment="center"
-        android:textSize="28sp" />
+        android:textSize="20sp" />
 
     <LinearLayout
         android:id="@+id/letterRow1"
@@ -77,10 +79,10 @@
         android:layout_weight="1" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/newGameButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.2"
         android:text="New Game" />
 
 </LinearLayout>
