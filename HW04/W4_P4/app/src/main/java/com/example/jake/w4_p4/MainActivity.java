@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
     private static boolean firstGame = true;
     private static String wordToSolve;
     private static String wordToDisplay;
-    private static int lives = 5;
+    private static int lives = 6;
     private static String hint;
+    private static Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
             firstGame = savedInstanceState.getBoolean("FIRST_GAME");
             lives = savedInstanceState.getInt("LIVES_LEFT");
         }
+        setHangmanImage();
 
         if (firstGame) {
             setUpNewGame();
@@ -150,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 response = "Wrong! Try again.";
             }
+            setHangmanImage();
         }
 
         if (gameEnd) {
@@ -157,7 +160,10 @@ public class MainActivity extends AppCompatActivity {
                 b.setEnabled(false);
             }
         }
-        Toast toast = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
+        if (toast != null) {
+            toast.cancel();
+        }
+        toast = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
         toast.show();
     }
 
@@ -179,7 +185,37 @@ public class MainActivity extends AppCompatActivity {
         if (hintView != null) {
             hintView.setText("HINT: " + word[1]);
         }
-        lives = 5;
+        lives = 6;
+        setHangmanImage();
+    }
+
+    private void setHangmanImage() {
+        switch (lives) {
+            case 6:
+                hangmanView.setImageResource(R.drawable.hangman_0);
+                break;
+            case 5:
+                hangmanView.setImageResource(R.drawable.hangman_1);
+                break;
+            case 4:
+                hangmanView.setImageResource(R.drawable.hangman_2);
+                break;
+            case 3:
+                hangmanView.setImageResource(R.drawable.hangman_3);
+                break;
+            case 2:
+                hangmanView.setImageResource(R.drawable.hangman_4);
+                break;
+            case 1:
+                hangmanView.setImageResource(R.drawable.hangman_5);
+                break;
+            case 0:
+                hangmanView.setImageResource(R.drawable.hangman_6);
+                break;
+            default:
+                hangmanView.setImageResource(R.drawable.hangman_0);
+                break;
+        }
     }
 
 }
