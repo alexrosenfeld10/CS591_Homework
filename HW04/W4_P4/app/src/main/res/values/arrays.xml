@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="word0">
+        <item name="word">TANGERINE</item>
+        <item name="hint">FOOD</item>
+    </string-array>
+    <string-array name="word1">
+        <item name="word">BADGER</item>
+        <item name="hint">ANIMAL</item>
+    </string-array>
+    <string-array name="word2">
+        <item name="word">BAGPIPES</item>
+        <item name="hint">INSTRUMENT</item>
+    </string-array>
+    <string-array name="word3">
+        <item name="word">PAJAMAS</item>
+        <item name="hint">CLOTHING</item>
+    </string-array>
+    <string-array name="word4">
+        <item name="word">YACHT</item>
+        <item name="hint">VEHICLE</item>
+    </string-array>
+    <array name="hangman_words">
+        <item>@array/word0</item>
+        <item>@array/word1</item>
+        <item>@array/word2</item>
+        <item>@array/word3</item>
+        <item>@array/word4</item>
+    </array>
+</resources>
