@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void processGuess(char letter) {
         String response;
+        boolean gameEnd = false;
         boolean correct = false;
         for (int i = 0; i < wordToSolve.length(); i++) {
             if (wordToSolve.charAt(i) == letter) {
@@ -134,18 +135,27 @@ public class MainActivity extends AppCompatActivity {
                 correct = true;
             }
         }
-        if (!correct) {
+        if (correct) {
+            if (wordToDisplay.indexOf('_') == -1) {
+                response = "Good job, you guessed the word!";
+                gameEnd = true;
+            } else {
+                response = "Correct!";
+            }
+        } else {
             lives--;
             if (lives == 0) {
                 response = "No more guesses. Game over!";
-                for (Button b : letterButtons) {
-                    b.setEnabled(false);
-                }
+                gameEnd = true;
             } else {
                 response = "Wrong! Try again.";
             }
-        } else {
-            response = "Correct!";
+        }
+
+        if (gameEnd) {
+            for (Button b : letterButtons) {
+                b.setEnabled(false);
+            }
         }
         Toast toast = Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT);
         toast.show();
