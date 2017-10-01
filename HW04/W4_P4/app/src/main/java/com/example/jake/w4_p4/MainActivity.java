@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
             }
             firstGame = savedInstanceState.getBoolean("FIRST_GAME");
             lives = savedInstanceState.getInt("LIVES_LEFT");
+            setHangmanImage();
         }
-        setHangmanImage();
 
         if (firstGame) {
             setUpNewGame();

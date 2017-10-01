@@ -7,6 +7,10 @@
     android:orientation="vertical"
     tools:context="com.example.jake.w4_p4.MainActivity">
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="15dp" />
+
     <ImageView
         android:id="@+id/hangmanView"
         android:layout_width="match_parent"
