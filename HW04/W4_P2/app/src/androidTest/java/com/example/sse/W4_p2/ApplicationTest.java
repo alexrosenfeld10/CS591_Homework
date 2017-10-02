@@ -1,4 +1,4 @@
-package com.example.sse.W4_p2;
+package com.example.sse.W4_P2;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

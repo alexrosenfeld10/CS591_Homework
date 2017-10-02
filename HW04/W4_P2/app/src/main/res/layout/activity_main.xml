@@ -7,17 +7,17 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.sse.W4_p2.MainActivity">
+    tools:context="com.example.sse.W4_P2.MainActivity">
 
     <SeekBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/seekBar"
-        android:layout_marginTop="166dp"
+        android:layout_marginTop="30dp"
         android:max="100000"
         android:progress="10000"
         android:indeterminate="false"
-        android:layout_below="@+id/textView"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
     <WebView
@@ -26,6 +26,6 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/seekBar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="108dp" />
+        android:layout_marginTop="129dp" />
 
 </RelativeLayout>

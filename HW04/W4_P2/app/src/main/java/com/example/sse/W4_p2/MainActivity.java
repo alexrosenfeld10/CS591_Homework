@@ -1,6 +1,7 @@
-package com.example.sse.W4_p2;
+package com.example.sse.W4_P2;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -11,34 +12,42 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import android.util.Log;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String TAG = "Accelerate";
+    private String TAG = "W4_P2";
 
-    private float lastX, lastY, lastZ;  //old coordinate positions from accelerometer, needed to calculate delta.
+    private float lastX, lastY, lastZ;
     private float acceleration;
     private float currentAcceleration;
     private float lastAcceleration;
 
     private SeekBar seekBar;
+    private WebView webSearchView;
+    private Button testButton;
 
-    // value used to determine whether user shook the device "significantly"
-    private static int SIGNIFICANT_SHAKE = 1000;   //tweak this as necessary
+    private static int SIGNIFICANT_SHAKE = 50000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         // initialize acceleration values
-        acceleration = 0.00f;                                         //Initializing Acceleration data.
-        currentAcceleration = SensorManager.GRAVITY_EARTH;            //We live on Earth.
-        lastAcceleration = SensorManager.GRAVITY_EARTH;               //Ctrl-Click to see where else we could use our phone.
+        acceleration = 0.00f;
+        currentAcceleration = SensorManager.GRAVITY_EARTH;
+        lastAcceleration = SensorManager.GRAVITY_EARTH;
         setContentView(R.layout.activity_main);
 
         seekBar = (SeekBar)findViewById(R.id.seekBar);
+        seekBar.setProgress(50000);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -53,6 +62,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
+            }
+        });
+
+        webSearchView = (WebView)findViewById(R.id.webSearchView);
+        WebSettings webSettings = webSearchView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        webSearchView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
             }
         });
     }
@@ -71,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    // enable listening for accelerometer events
     private void enableAccelerometerListening() {
         // The Activity has a SensorManager Reference.
         // This is how we get the reference to the device's SensorManager.
@@ -110,12 +130,6 @@ public class MainActivity extends AppCompatActivity {
     private final SensorEventListener sensorEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            // get x, y, and z values for the SensorEvent
-            // each time the event fires, we have access to three dimensions.
-            // compares these values to previous values to determine how "fast"
-            // the device was shaken.
-            //Ref: http://developer.android.com/reference/android/hardware/SensorEvent.html
-
             float x = event.values[0];   //always do this first
             float y = event.values[1];
             float z = event.values[2];
@@ -124,26 +138,60 @@ public class MainActivity extends AppCompatActivity {
             lastAcceleration = currentAcceleration;
 
             // calculate the current acceleration
-            currentAcceleration = x * x + y * y + z * z;   //This is a simplified calculation, to be real we would need time and a square root.
+            currentAcceleration = x * x + y * y + z * z;
 
-            // calculate the change in acceleration        //Also simplified, but good enough to determine random shaking.
+            // calculate the change in acceleration
             acceleration = currentAcceleration *  (currentAcceleration - lastAcceleration);
 
+            // if the user shakes really, really hard
+            if (acceleration > 10000) {
+                Log.i(TAG, "Significant movement, causing dizziness");
+                Toast.makeText(MainActivity.this, "Significant movement", Toast.LENGTH_LONG).show();
+                webSearchView.loadUrl("https://jumpingjaxfitness.files.wordpress.com/2010/07/dizziness.jpg");
+            }
+
             // if the acceleration is above a certain threshold
-                if (acceleration > SIGNIFICANT_SHAKE) {
-                    Log.i(TAG, "Significant movement");
-                    Toast.makeText(MainActivity.this, "Significant movement", Toast.LENGTH_LONG).show();
+            else if (acceleration > SIGNIFICANT_SHAKE) {
+                Log.i(TAG, "Significant movement");
+                Toast.makeText(MainActivity.this, "Significant movement", Toast.LENGTH_LONG).show();
+
+                float[] delta = new float[3];
+                delta[0] = x-lastX;
+                delta[1]= y-lastY;
+                delta[2] = z-lastZ;
+
+                int maxIndex = 0;
+                float maxDelta = delta[0];
+                for (int i = 0; i < delta.length; i++) {
+                    if (delta[i] > maxDelta) {
+                        maxIndex = i;
+                        maxDelta = delta[i];
+                    }
                 }
 
-            float deltaX = x-lastX;
-            float deltaY = y-lastY;
-            float deltaZ = z-lastZ;
-
+                switch(maxIndex){
+                    case 0:
+                        Log.i(TAG, "Google activated");
+                        webSearchView.loadUrl("http://www.google.com");
+                        break;
+                    case 1:
+                        Log.i(TAG, "Yahoo activated");
+                        webSearchView.loadUrl("http://www.yahoo.com");
+                        break;
+                    case 2:
+                        Log.i(TAG, "Bing activated");
+                        webSearchView.loadUrl("http://www.bing.com");
+                        break;
+                    default:
+                        Log.i(TAG, "Default case hit");
+                        break;
+                }
+            }
 
             lastX = x;
             lastY = y;
             lastZ = z;
-}
+        }
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
