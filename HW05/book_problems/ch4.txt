@@ -1,0 +1,38 @@
+17. <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/age"
+                android:layout_toRightOf="@+id/Name"
+
+                android:inputType="numberDecimal" />
+18.  <activity android:name=".MyActivity"/>
+
+19. Intent secondActivity = new Intent(getApplicationContext(), SecondActivity.class);
+    startActivity(secondActivity);
+
+20.
+
+@Override
+protected void onRestoreInstanceState(Bundle outState) {
+    modifyThisActivity();
+    super.onSaveInstanceState(outState);
+}
+
+21. 
+
+<scale
+        android:duration="5000"
+        android:fromXScale="0.0"
+        android:fromYScale="0.0"
+        android:toXScale="1.0"
+        android:toYScale="1.0" />
+
+22. 
+
+<rotate android:fromDegrees="0"
+        android:toDegrees="180"
+        android:pivotX="0%"
+        android:pivotY="0%"
+        android:duration="5000"
+        android:interpolator="@android:anim/cycle_interpolator"/>
+
