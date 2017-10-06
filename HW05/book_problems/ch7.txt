@@ -1,0 +1,26 @@
+1. setOnTouchListener
+2. getAction
+3. bringToFront
+4. GestureDetector
+5. Public static inner interfaces of GestureDetector
+6. Constants that the action can be compared to
+7. onTouchEvent
+
+18. 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+
+        GD = new GestureDetectorCompat(this, this);
+        GD.setOnDoubleTapListener(this);
+    }
+
+19. 
+
+ @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        this.GD.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
