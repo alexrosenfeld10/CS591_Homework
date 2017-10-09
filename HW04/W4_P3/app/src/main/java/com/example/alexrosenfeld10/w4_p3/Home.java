@@ -33,11 +33,11 @@ public class Home extends AppCompatActivity implements GestureDetector.OnGesture
     }
 
     // Set up our gesture detector to receive touch events
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        this.GD.onTouchEvent(event);
-        return super.onTouchEvent(event);
-    }
+        @Override
+        public boolean onTouchEvent(MotionEvent event) {
+            this.GD.onTouchEvent(event);
+            return super.onTouchEvent(event);
+        }
 
     @Override
     public boolean onSingleTapConfirmed(MotionEvent e) {
