@@ -3,10 +3,9 @@ package com.example.jake.c7_p30;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
 import java.util.Random;
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean inAddOperatorView(int x, int y) {
         Log.i("C7_P30", "inAddOperatorView called");
 
-        int minY = spaceTop.getHeight();
+        int minY = getStatusBarHeight() + getActionBarHeight() + spaceTop.getHeight();
         int maxY = minY + addOperator.getHeight();
         int minX = operand1.getWidth();
         int maxX = minX + addOperator.getWidth();
@@ -64,13 +63,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public int getStatusBarHeight() {
+        int statusId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (statusId > 0) {
+            return getResources().getDimensionPixelSize(statusId);
+        } else {
+            return 0;
+        }
+    }
+
+    public int getActionBarHeight() {
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(R.attr.actionBarSize, tv, true)) {
+            return TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+        } else {
+            return 0;
+        }
+    }
+
     public boolean onTouchEvent(MotionEvent event) {
         detector.onTouchEvent(event);
         return true;
     }
 
     private class DoubleTapHandler extends GestureDetector.SimpleOnGestureListener {
-        public boolean onDoubleTapEvent(MotionEvent e) {
+        public boolean onDoubleTap(MotionEvent e) {
+            Log.i("C7_P30", "onDoubleTapEvent called");
             int touchX = (int) e.getRawX();
             int touchY = (int) e.getRawY();
 
