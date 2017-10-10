@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         textFling = (TextView) findViewById(R.id.textThing);
         mainScreen = (FrameLayout) findViewById(R.id.mainScreen);
         GD = new GestureDetectorCompat(this, this);
+
+
     }
 
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         this.GD.onTouchEvent(event);
+        textFling.setClickable(true);
         return super.onTouchEvent(event);
     }
 
