@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.alexrosenfeld10.pulling_it_all_together.MainActivity">
+
+    <ImageView
+        android:id="@+id/spicy"
+        android:layout_width="172dp"
+        android:layout_height="188dp"
+        android:layout_x="95dp"
+        android:layout_y="151dp"
+        app:srcCompat="@drawable/spicy" />
+
+</AbsoluteLayout>
