@@ -1,7 +1,6 @@
 package com.example.alexrosenfeld10.pulling_it_all_together;
 
 import android.content.Intent;
-import android.support.v4.app.ShareCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
     @Override
     public boolean onDoubleTap(MotionEvent motionEvent) {
-        Animation myRotation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
+        Animation myRotation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.spicy_rotate);
         spicy.startAnimation(myRotation);
         return true;
     }
