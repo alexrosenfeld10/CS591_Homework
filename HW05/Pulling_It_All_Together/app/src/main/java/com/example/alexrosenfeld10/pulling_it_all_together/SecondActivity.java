@@ -27,7 +27,7 @@ public class SecondActivity extends AppCompatActivity implements GestureDetector
     // values used to determine whether user shook the device "significantly"
     private static int SIGNIFICANT_SHAKE = 1000;   //tweak this as necessary
     private static int SEMI_SIGNIFICANT_SHAKE = 50;
-    private static int ANIMATION_SPEED = 1000;
+    private static int ANIMATION_SPEED = 0;
 
     private final int MIN_SWIPE_DISTANCE = 100;
     private final int MIN_SWIPE_VELOCITY = 60;
@@ -141,23 +141,28 @@ public class SecondActivity extends AppCompatActivity implements GestureDetector
             // if the acceleration is above a certain threshold
             if (acceleration > SIGNIFICANT_SHAKE) {
                 Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                shake.setDuration(shake.getDuration() - ANIMATION_SPEED);
                 monkaS.startAnimation(shake);
             } else if (acceleration > SEMI_SIGNIFICANT_SHAKE) {
                 if (Math.abs(x - lastX) > Math.abs(y - lastY)) {
                     if (x - lastX > 0) {
                         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_right);
+                        animation.setDuration(animation.getDuration() - ANIMATION_SPEED);
                         monkaS.startAnimation(animation);
                     } else if (x - lastX < 0) {
                         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_left);
+                        animation.setDuration(animation.getDuration() - ANIMATION_SPEED);
                         monkaS.startAnimation(animation);
                     }
 
                 } else {
                     if (y - lastY > 0) {
                         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_up);
+                        animation.setDuration(animation.getDuration() - ANIMATION_SPEED);
                         monkaS.startAnimation(animation);
                     } else if (y - lastY < 0) {
                         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_down);
+                        animation.setDuration(animation.getDuration() - ANIMATION_SPEED);
                         monkaS.startAnimation(animation);
                     }
                 }
