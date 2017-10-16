@@ -25,12 +25,12 @@ public class SecondActivity extends AppCompatActivity implements GestureDetector
     private SeekBar seekBar;
 
     // values used to determine whether user shook the device "significantly"
-    private static int SIGNIFICANT_SHAKE = 1000;   //tweak this as necessary
-    private static int SEMI_SIGNIFICANT_SHAKE = 50;
+    private static int SIGNIFICANT_SHAKE = 1000000;   //tweak this as necessary
+    private static int SEMI_SIGNIFICANT_SHAKE = 10000;
     private static int ANIMATION_SPEED = 0;
 
-    private final int MIN_SWIPE_DISTANCE = 100;
-    private final int MIN_SWIPE_VELOCITY = 60;
+    private final int MIN_SWIPE_DISTANCE = 200;
+    private final int MIN_SWIPE_VELOCITY = 7500;
 
     private GestureDetectorCompat GD;
     private ImageView monkaS;
@@ -53,7 +53,7 @@ public class SecondActivity extends AppCompatActivity implements GestureDetector
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                ANIMATION_SPEED = progress;
+                ANIMATION_SPEED = progress*400 + 3000;
             }
 
             @Override
@@ -141,28 +141,28 @@ public class SecondActivity extends AppCompatActivity implements GestureDetector
             // if the acceleration is above a certain threshold
             if (acceleration > SIGNIFICANT_SHAKE) {
                 Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-                shake.setDuration(shake.getDuration() - ANIMATION_SPEED);
+                shake.setDuration(ANIMATION_SPEED);
                 monkaS.startAnimation(shake);
             } else if (acceleration > SEMI_SIGNIFICANT_SHAKE) {
                 if (Math.abs(x - lastX) > Math.abs(y - lastY)) {
                     if (x - lastX > 0) {
                         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_right);
-                        animation.setDuration(animation.getDuration() - ANIMATION_SPEED);
+                        animation.setDuration(ANIMATION_SPEED);
                         monkaS.startAnimation(animation);
                     } else if (x - lastX < 0) {
                         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_left);
-                        animation.setDuration(animation.getDuration() - ANIMATION_SPEED);
+                        animation.setDuration(ANIMATION_SPEED);
                         monkaS.startAnimation(animation);
                     }
 
                 } else {
                     if (y - lastY > 0) {
                         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_up);
-                        animation.setDuration(animation.getDuration() - ANIMATION_SPEED);
+                        animation.setDuration(ANIMATION_SPEED);
                         monkaS.startAnimation(animation);
                     } else if (y - lastY < 0) {
                         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.move_down);
-                        animation.setDuration(animation.getDuration() - ANIMATION_SPEED);
+                        animation.setDuration(ANIMATION_SPEED);
                         monkaS.startAnimation(animation);
                     }
                 }
@@ -230,7 +230,7 @@ public class SecondActivity extends AppCompatActivity implements GestureDetector
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         // right to left swipe
         if (e1.getX() - e2.getX() >= MIN_SWIPE_DISTANCE) {
-            if (velocityX >= MIN_SWIPE_VELOCITY) {
+            if (Math.abs(velocityX) >= MIN_SWIPE_VELOCITY) {
                 Animation myRotation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.cc10);
                 monkaS.startAnimation(myRotation);
             } else {
@@ -241,7 +241,7 @@ public class SecondActivity extends AppCompatActivity implements GestureDetector
         }
         // left to right swipe
         else if (e2.getX() - e1.getX() >= MIN_SWIPE_DISTANCE) {
-            if (velocityX >= MIN_SWIPE_VELOCITY) {
+            if (Math.abs(velocityX) >= MIN_SWIPE_VELOCITY) {
                 Animation myRotation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.c10);
                 monkaS.startAnimation(myRotation);
             } else {
