@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.alexrosenfeld10.w6_p1.MainActivity"
+    tools:context="com.example.alexrosenfeld10.w6_p2.MainActivity"
     android:orientation="vertical">
 
     <LinearLayout
@@ -20,7 +20,7 @@
         <fragment
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
-            android:name="com.example.alexrosenfeld10.w6_p1.ControlFragment"
+            android:name="com.example.alexrosenfeld10.w6_p2.ControlFragment"
             android:id="@+id/fragment2"
             android:layout_gravity="center_vertical"
             tools:layout="@layout/fragment_control"
@@ -36,7 +36,7 @@
         <fragment
             android:layout_width="wrap_content"
             android:layout_height="280dp"
-            android:name="com.example.alexrosenfeld10.w6_p1.BottomFragment"
+            android:name="com.example.alexrosenfeld10.w6_p2.BottomFragment"
             android:id="@+id/bottomFragment"
             tools:layout="@layout/fragment_blank" />
     </LinearLayout>
