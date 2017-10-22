@@ -7,8 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -19,14 +23,14 @@ import android.widget.EditText;
 public class ControlFragment extends Fragment {
 
 
-    private EditText edtSendMessage;
+    private ListView lstView;
     private Button btnSendMessage;
 
     public ControlFragment() {  //todo, why?
         // Required empty public constructor
     }
 
-//*** MESSAGE PASSING MECHANISM ***//
+    //*** MESSAGE PASSING MECHANISM ***//
 //Need to create an interface to ensure message passing works between fragments.
 //This interface, as with all interfaces serves as a contract.  It guarantees
 //Since the MainActivity will implement this, we are guaranteed to find a sendMessage
@@ -36,7 +40,7 @@ public class ControlFragment extends Fragment {
     }
 
     ControlFragmentListener CFL;  //Future reference to an object that implements ControlFragmentListener,
-                                  //Question: Who holds the reference?  Answer: ____________
+    //Question: Who holds the reference?  Answer: ____________
 //*** MESSAGE PASSING MECHANISM ***//
 
 
@@ -59,22 +63,21 @@ public class ControlFragment extends Fragment {
 //    }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_control, container, false);  //this needs to be separated from return statement,
-                                                                                  //so we can refer to the views objects before passing view to Activity.
+        //so we can refer to the views objects before passing view to Activity.
 
-        edtSendMessage = (EditText) view.findViewById(R.id.edtSendMessage);
+        lstView = (ListView) view.findViewById(R.id.lstView);
         btnSendMessage = (Button) view.findViewById(R.id.btnSendMessage);
 
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CFL.sendMessage(edtSendMessage.getText().toString());  //CFL is a handle to our MainActivity, we are sending it our message text.
+                CFL.sendMessage(lstView.getSelectedItem().toString());  //CFL is a handle to our MainActivity, we are sending it our message text.
             }
         });
 
