@@ -25,14 +25,11 @@ public class DrawableFragment extends Fragment {
     ArrayList<Float> ratings; // keep track of our ratings
     private int currDrawableIndex;
     private ImageView imgRateMe;
-    private Button btnLeft;
-    private Button btnRight;
     private RatingBar ratingBar;
 
     public DrawableFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,8 +44,6 @@ public class DrawableFragment extends Fragment {
         getDrawables();
 
         imgRateMe = (ImageView) v.findViewById(R.id.imgRateMe);
-        btnRight = (Button) v.findViewById(R.id.btnRight);
-        btnLeft = (Button) v.findViewById(R.id.btnLeft);
         ratingBar = (RatingBar) v.findViewById(R.id.ratingBar);
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -57,30 +52,6 @@ public class DrawableFragment extends Fragment {
                 ratings.set(currDrawableIndex, rating);
             }
         });
-
-        btnLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currDrawableIndex == 0)
-                    currDrawableIndex = drawables.size() - 1;
-                else
-                    currDrawableIndex--;
-                changePicture();
-            }
-        });
-
-        btnRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (currDrawableIndex == drawables.size() - 1)
-                    currDrawableIndex = 0;
-                else
-                    currDrawableIndex++;
-
-                changePicture();
-            }
-        });
-
 
         return v;   //must happen last, it is a return statement after all, it can't happen sooner!
     }
@@ -91,6 +62,21 @@ public class DrawableFragment extends Fragment {
         ratingBar.setRating(ratings.get(currDrawableIndex));
     }
 
+    public void goLeft() {
+        if (currDrawableIndex == 0)
+            currDrawableIndex = drawables.size() - 1;
+        else
+            currDrawableIndex--;
+        changePicture();
+    }
+
+    public void goRight() {
+        if (currDrawableIndex == drawables.size() - 1)
+            currDrawableIndex = 0;
+        else
+            currDrawableIndex++;
+        changePicture();
+    }
 
     //REF: http://stackoverflow.com/questions/31921927/how-to-get-all-drawable-resources
 
@@ -111,6 +97,17 @@ public class DrawableFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void process(String msg) {
+        switch (msg){
+            case "left":
+                goLeft();
+                break;
+            case "right":
+                goRight();
+                break;
         }
     }
 }
