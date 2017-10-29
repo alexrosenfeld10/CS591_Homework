@@ -10,33 +10,17 @@
     android:orientation="vertical"
     tools:context="com.example.tkixi.w7_p2.MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="" />
 
-    <EditText
-        android:id="@+id/editView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="" />
 
-    <CheckBox
-        android:id="@+id/redBox"
+    <fragment
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Red" />
+        android:layout_height="match_parent"
+        android:name="com.example.tkixi.w7_p2.SharedFrag"
+        android:id="@+id/FragLayout"
+        tools:layout="@layout/activity_frag">
+    </fragment>
 
-    <CheckBox
-        android:id="@+id/greenBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Green" />
 
-    <CheckBox
-        android:id="@+id/blueBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Blue" />
+
 </LinearLayout>
