@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/mnu_one"
+        android:title="Beam Me Up"
+        app:showAsAction="collapseActionView">
+    </item>
+
+    <item
+        android:id="@+id/mnu_two"
+        android:title="Nuclear Wessels"
+        app:showAsAction="collapseActionView">
+    </item>
+
+    <item
+        android:id="@+id/mnu_three"
+        android:title="Phasers on Stun"
+        app:showAsAction="collapseActionView">
+    </item>
+
+    <item
+        android:id="@+id/mnu_four"
+        android:title="Live Long and Prosper"
+        app:showAsAction="collapseActionView">
+    </item>
+
+    <item
+        android:id="@+id/mnu_five"
+        android:title="Kahn!!!"
+        app:showAsAction="collapseActionView">
+    </item>
+
+
+</menu>
