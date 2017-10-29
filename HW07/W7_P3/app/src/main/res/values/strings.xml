@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">W7_P3</string>
+    <string name="app_name">Trekkie Central</string>
     <string-array name="episodes">
-        <item name = "ep0">Spock\'s Brain</item>
-        <item name = "ep1">Arena</item>
-        <item name = "ep2">This Side of Paradise</item>
+        <item>Spock\'s Brain</item>
+        <item>Arena</item>
+        <item>This Side of Paradise</item>
         <item>Mirror, Mirror</item>
         <item>Plato\'s Step Children</item>
         <item>The Naked Time</item>
