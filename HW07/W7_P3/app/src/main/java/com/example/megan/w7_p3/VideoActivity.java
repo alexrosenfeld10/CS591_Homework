@@ -24,7 +24,7 @@ public class VideoActivity extends AppCompatActivity {
 
         VideoView vidView = (VideoView)findViewById(R.id.videoView);
 
-        Uri vidUri = Uri.parse("android.resource://" + getPackageName() + "/raw/khan");
+        Uri vidUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.khan);
 
         vidView.setVideoURI(vidUri);
 
