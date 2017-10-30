@@ -28,7 +28,7 @@
 
     <item
         android:id="@+id/mnu_five"
-        android:title="Kahn!!!"
+        android:title="Khan!!!"
         app:showAsAction="collapseActionView">
     </item>
 

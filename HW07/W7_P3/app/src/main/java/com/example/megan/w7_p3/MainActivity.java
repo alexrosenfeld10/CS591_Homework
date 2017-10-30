@@ -2,8 +2,12 @@ package com.example.megan.w7_p3;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.AssetFileDescriptor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +22,8 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             // and instead show a different website
             String url = "http://shop.startrek.com";
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             return true;
         }
@@ -95,11 +101,15 @@ public class MainActivity extends AppCompatActivity {
 
         // if item four clicked, play audio of "Live Long and Prosper"
         if (id == R.id.mnu_four) {
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.live_long_audio);
+            mediaPlayer.start();
             return true;
         }
 
         // if item five clicked, play video of "KAHN" scene
         if (id == R.id.mnu_five) {
+            Intent intent = new Intent(MainActivity.this, VideoActivity.class);
+            startActivity(intent);
             return true;
         }
 
