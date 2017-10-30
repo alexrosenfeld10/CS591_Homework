@@ -19,9 +19,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.MediaController;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import java.io.IOException;
 import java.util.ArrayList;

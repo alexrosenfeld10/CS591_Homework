@@ -24,14 +24,14 @@ public class VideoActivity extends AppCompatActivity {
 
         VideoView vidView = (VideoView)findViewById(R.id.videoView);
 
-        Uri vidUri = Uri.parse("android.resource://" + getPackageName() + "/raw/khaaaaan");
+        Uri vidUri = Uri.parse("android.resource://" + getPackageName() + "/raw/khan");
 
         vidView.setVideoURI(vidUri);
-
-        vidView.start();
 
         MediaController vidControl = new MediaController(this);
 
         vidView.setMediaController(vidControl);
+
+        vidView.start();
     }
 }
