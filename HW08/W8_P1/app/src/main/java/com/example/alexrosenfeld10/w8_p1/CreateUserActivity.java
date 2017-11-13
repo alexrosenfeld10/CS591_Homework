@@ -15,6 +15,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateUserActivity extends AppCompatActivity {
 
@@ -22,6 +28,8 @@ public class CreateUserActivity extends AppCompatActivity {
 
     private EditText edtNewUser;
     private EditText edtNewPass;
+    private EditText edtFirstName;
+    private EditText edtLastName;
     private Button btnSubmitNewUser;
 
     private FirebaseAuth mAuth;
@@ -35,6 +43,8 @@ public class CreateUserActivity extends AppCompatActivity {
 
         edtNewUser = findViewById(R.id.edtNewUser);
         edtNewPass = findViewById(R.id.edtNewPass);
+        edtFirstName = findViewById(R.id.edtFirstName);
+        edtLastName = findViewById(R.id.edtLastName);
         btnSubmitNewUser = findViewById(R.id.btnSubmitNewUser);
 
         btnSubmitNewUser.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +60,20 @@ public class CreateUserActivity extends AppCompatActivity {
                                     Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
+
+                                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                                    DatabaseReference users = database.getReference().child("Users");
+
+                                    String userKey = user.getUid();
+                                    User userData = new User(userKey, edtNewUser.getText().toString(), edtNewPass.getText().toString(), edtFirstName.getText().toString(), edtLastName.getText().toString(), new ArrayList<Test>());
+
+                                    Map<String, Object> userUpdate = new HashMap<>();
+                                    userUpdate.put(userKey, userData.toMap());
+
+                                    users.updateChildren(userUpdate);
+
                                     i.putExtra("userName", user.getEmail());
+                                    i.putExtra("Uid", userKey);
                                     startActivity(i);
                                 } else {
                                     // If sign in fails, display a message to the user.

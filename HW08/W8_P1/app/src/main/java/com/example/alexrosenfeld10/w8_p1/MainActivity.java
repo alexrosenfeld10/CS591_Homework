@@ -9,6 +9,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,13 +31,19 @@ public class MainActivity extends AppCompatActivity {
 
     private int numCorrect = 0;
     private int numQuestions = 0;
+    private String currentTestId;
+    private String Uid;
 
     private Random random = new Random();
+
+    FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        database = FirebaseDatabase.getInstance();
 
         btnLeaderboard = findViewById(R.id.btnLeaderboard);
 
@@ -38,12 +55,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //TODO handle this differently, maybe. Now getting from database, should still pas through bundle?
         String userName;
+        String userGUID;
         Bundle bundle = getIntent().getExtras();
         userName = bundle.getString("userName");
+        userGUID = bundle.getString("Uid");
+        Uid = userGUID;
 
         Toast.makeText(MainActivity.this, "Welcome " + userName, Toast.LENGTH_LONG).show();
+
+        createAndBindNewTest();
+
         setupQuestion();
     }
 
@@ -83,9 +105,41 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
             numQuestions = 0; // let the user keep going
             numCorrect = 0; // reset correct count
+
+            createAndBindNewTest();
+
         }
 
         setupQuestion();
+    }
+
+    private void createAndBindNewTest() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference tests = database.getReference().child("Tests/");
+        DatabaseReference users = database.getReference().child("Users/");
+
+        final String newTestKey = tests.push().getKey();
+        Test test = new Test(newTestKey, Calendar.getInstance().getTime().toString(), 0, Uid, new ArrayList<Question>());
+        currentTestId = newTestKey;
+        Map<String, Object> testUpdate = new HashMap<>();
+        testUpdate.put(newTestKey, test.toMap());
+
+        tests.updateChildren(testUpdate);
+        final DatabaseReference testsRef = users.child(Uid).child("tests");
+        testsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                ArrayList<String> tests = dataSnapshot.getValue() == null ? new ArrayList<String>() : (ArrayList<String>) dataSnapshot.getValue();
+                tests.add(newTestKey);
+                testsRef.setValue(tests);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void setupQuestion() {
@@ -126,12 +180,60 @@ public class MainActivity extends AppCompatActivity {
         int divisor = Integer.parseInt(txtDivisor.getText().toString());
         int dividend = Integer.parseInt(txtDividend.getText().toString());
         int correctAnswer = dividend / divisor;
+        boolean correct = false;
 
         String answer_string = edtQuotient.getText().toString();
         int answer = Integer.parseInt(answer_string);
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference tests = database.getReference().child("Tests/");
+        DatabaseReference problems = database.getReference().child("IndividualProblemResults/");
+
         if (answer == correctAnswer) {
             numCorrect++;
+            correct = true;
+
+            // Update the score if they got the question correct
+            final DatabaseReference currentTestScoreRef = tests.child(currentTestId).child("score");
+            currentTestScoreRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    long score = (long) dataSnapshot.getValue(); // getValue returns a long for some reason, needed to cast
+                    int intScore = new BigDecimal(score).intValueExact();
+                    intScore++; // setValue is async, must increment score first
+                    currentTestScoreRef.setValue(intScore);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
+
+        final String problemKey = tests.push().getKey();
+        Question question = new Question(problemKey, numQuestions, dividend, divisor, "/", correct, currentTestId);
+        Map<String, Object> questionUpdate = new HashMap<>();
+        questionUpdate.put(problemKey, question.toMap());
+
+        problems.updateChildren(questionUpdate);
+        final DatabaseReference testsRef = tests.child(currentTestId).child("questions");
+        testsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                ArrayList<String> questions = dataSnapshot.getValue() == null ? new ArrayList<String>() : (ArrayList<String>) dataSnapshot.getValue();
+                questions.add(problemKey);
+                testsRef.setValue(questions);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+
     }
 }
