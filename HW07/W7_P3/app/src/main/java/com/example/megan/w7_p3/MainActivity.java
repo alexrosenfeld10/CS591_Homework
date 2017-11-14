@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(),
-                        "SMS faild, please try again later!",
+                        "SMS failed, please try again later!",
                         Toast.LENGTH_LONG).show();
                 e.printStackTrace();
             }
