@@ -36,17 +36,17 @@ public class LeaderboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leaderboard);
 
-        txtName1 = findViewById(R.id.txtName1);
-        txtName2 = findViewById(R.id.txtName2);
-        txtName3 = findViewById(R.id.txtName3);
-        txtName4 = findViewById(R.id.txtName4);
-        txtName5 = findViewById(R.id.txtName5);
+        txtName1 = (TextView) findViewById(R.id.txtName1);
+        txtName2 = (TextView)findViewById(R.id.txtName2);
+        txtName3 = (TextView)findViewById(R.id.txtName3);
+        txtName4 = (TextView)findViewById(R.id.txtName4);
+        txtName5 = (TextView)findViewById(R.id.txtName5);
 
-        txtScore1 = findViewById(R.id.txtScore1);
-        txtScore2 = findViewById(R.id.txtScore2);
-        txtScore3 = findViewById(R.id.txtScore3);
-        txtScore4 = findViewById(R.id.txtScore4);
-        txtScore5 = findViewById(R.id.txtScore5);
+        txtScore1 = (TextView)findViewById(R.id.txtScore1);
+        txtScore2 = (TextView)findViewById(R.id.txtScore2);
+        txtScore3 = (TextView) findViewById(R.id.txtScore3);
+        txtScore4 = (TextView)findViewById(R.id.txtScore4);
+        txtScore5 = (TextView)findViewById(R.id.txtScore5);
 
         names = new TextView[]{txtName1, txtName2, txtName3, txtName4, txtName5};
         scores = new TextView[]{txtScore1, txtScore2, txtScore3, txtScore4, txtScore5};
@@ -68,9 +68,9 @@ public class LeaderboardActivity extends AppCompatActivity {
                     data.add(snapshot.getValue(Test.class));
                 }
 
-                for (int i = 0; i < 5 || i >= data.size(); i++) {
+                for (int i = 0; i < 5 && i >= data.size(); i++) {
                     Test currentTest = data.get(data.size() - i - 1);
-                    //names[i].setText(currentTest.getUser());
+                    names[i].setText(currentTest.getFullName());
                     scores[i].setText(Integer.toString(currentTest.getScore()));
                 }
             }

@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private int numQuestions = 0;
     private String currentTestId;
     private String Uid;
+    private String userFullName;
 
     private Random random = new Random();
 
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         userName = bundle.getString("userName");
         userGUID = bundle.getString("Uid");
+        userFullName = bundle.getString("fullName");
+
         Uid = userGUID;
 
         Toast.makeText(MainActivity.this, "Welcome " + userName, Toast.LENGTH_LONG).show();
@@ -119,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference users = database.getReference().child("Users/");
 
         final String newTestKey = tests.push().getKey();
-        Test test = new Test(newTestKey, Calendar.getInstance().getTime().toString(), 0, Uid, new ArrayList<String>());
+        Test test = new Test(newTestKey, Calendar.getInstance().getTime().toString(), 0, Uid, new ArrayList<String>(), userFullName);
         currentTestId = newTestKey;
         Map<String, Object> testUpdate = new HashMap<>();
         testUpdate.put(newTestKey, test.toMap());

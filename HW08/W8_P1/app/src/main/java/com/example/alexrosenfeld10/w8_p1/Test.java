@@ -12,17 +12,19 @@ public class Test {
     private int score;
     private String user;
     private ArrayList<String> questions;
+    private String fullName;
 
     public Test() {
         // Required for deserialization
     }
 
-    public Test(String GUID, String dateTaken, int score, String user, ArrayList<String> questions) {
+    public Test(String GUID, String dateTaken, int score, String user, ArrayList<String> questions, String fullName) {
         this.GUID = GUID;
         this.dateTaken = dateTaken;
         this.score = score;
         this.user = user;
         this.questions = questions;
+        this.fullName = fullName;
     }
 
     public Map<String, Object> toMap() {
@@ -32,6 +34,7 @@ public class Test {
         result.put("score", score);
         result.put("user", user);
         result.put("questions", questions);
+        result.put("fullName", fullName);
         return result;
     }
 
@@ -55,6 +58,10 @@ public class Test {
         this.questions = questions;
     }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public String getGUID() {
 
         return GUID;
@@ -74,5 +81,9 @@ public class Test {
 
     public ArrayList<String> getQuestions() {
         return questions;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 }

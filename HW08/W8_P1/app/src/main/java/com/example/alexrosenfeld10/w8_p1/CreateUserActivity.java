@@ -74,6 +74,7 @@ public class CreateUserActivity extends AppCompatActivity {
 
                                     i.putExtra("userName", user.getEmail());
                                     i.putExtra("Uid", userKey);
+                                    i.putExtra("fullName", edtFirstName.getText().toString() + " "  + edtLastName.getText().toString());
                                     startActivity(i);
                                 } else {
                                     // If sign in fails, display a message to the user.

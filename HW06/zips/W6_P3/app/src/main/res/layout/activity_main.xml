@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.jake.w4_p4.MainActivity">
+
+    <fragment
+        android:id="@+id/fragment_game"
+        android:name="com.example.jake.w4_p4.GameFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_game" />
+
+    <fragment
+        android:id="@+id/fragment_letters"
+        android:name="com.example.jake.w4_p4.LettersFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.9"
+        tools:layout="@layout/fragment_letters" />
+
+    <fragment
+        android:id="@+id/fragment_hint"
+        android:name="com.example.jake.w4_p4.HintFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        tools:layout="@layout/fragment_hint" />
+
+</LinearLayout>
