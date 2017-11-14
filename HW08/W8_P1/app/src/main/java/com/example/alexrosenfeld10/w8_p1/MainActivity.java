@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference users = database.getReference().child("Users/");
 
         final String newTestKey = tests.push().getKey();
-        Test test = new Test(newTestKey, Calendar.getInstance().getTime().toString(), 0, Uid, new ArrayList<Question>());
+        Test test = new Test(newTestKey, Calendar.getInstance().getTime().toString(), 0, Uid, new ArrayList<String>());
         currentTestId = newTestKey;
         Map<String, Object> testUpdate = new HashMap<>();
         testUpdate.put(newTestKey, test.toMap());

@@ -14,6 +14,9 @@ public class Question {
     private boolean answeredCorrectly;
     private String test;
 
+    public Question() {
+    }
+
     public Question(String GUID, int problemNumber, int operand1, int operand2, String operation, boolean answeredCorrectly, String test) {
         this.GUID = GUID;
         this.problemNumber = problemNumber;

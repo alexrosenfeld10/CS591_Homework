@@ -11,6 +11,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LeaderboardActivity extends AppCompatActivity {
 
     //TODO define needed view references
@@ -45,16 +48,24 @@ public class LeaderboardActivity extends AppCompatActivity {
         getData();
     }
 
-    private void getData(){
-        //TODO connect to database and get data
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private void getData() {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference users = database.getReference().child("Users/");
         DatabaseReference tests = database.getReference().child("Tests/");
         Query queryRef = tests.orderByChild("score");
+
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                int x = 4;
+                ArrayList<Test> data = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    data.add(snapshot.getValue(Test.class));
+                }
+
+                for (int i = 0; i < 5 || i >= data.size(); i++) {
+                    Test currentTest = data.get(i);
+                    //TODO use currentTest.fields to update UI (5 or less times)
+                }
             }
 
             @Override

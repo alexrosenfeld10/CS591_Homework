@@ -65,7 +65,7 @@ public class CreateUserActivity extends AppCompatActivity {
                                     DatabaseReference users = database.getReference().child("Users");
 
                                     String userKey = user.getUid();
-                                    User userData = new User(userKey, edtNewUser.getText().toString(), edtNewPass.getText().toString(), edtFirstName.getText().toString(), edtLastName.getText().toString(), new ArrayList<Test>());
+                                    User userData = new User(userKey, edtNewUser.getText().toString(), edtNewPass.getText().toString(), edtFirstName.getText().toString(), edtLastName.getText().toString(), new ArrayList<String>());
 
                                     Map<String, Object> userUpdate = new HashMap<>();
                                     userUpdate.put(userKey, userData.toMap());

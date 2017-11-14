@@ -13,12 +13,12 @@ public class User {
     private String firstName;
     private String lastName;
 
-    private ArrayList<Test> tests;
+    private ArrayList<String> tests;
 
     User() {
     }
 
-    public User(String Uid, String userName, String password, String firstName, String lastName, ArrayList<Test> tests) {
+    public User(String Uid, String userName, String password, String firstName, String lastName, ArrayList<String> tests) {
         this.Uid = Uid;
         this.userName = userName;
         this.password = password;
@@ -62,7 +62,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void setTests(ArrayList<Test> tests) {
+    public void setTests(ArrayList<String> tests) {
         this.tests = tests;
     }
 
@@ -86,7 +86,7 @@ public class User {
         return lastName;
     }
 
-    public ArrayList<Test> getTests() {
+    public ArrayList<String> getTests() {
         return tests;
     }
 }

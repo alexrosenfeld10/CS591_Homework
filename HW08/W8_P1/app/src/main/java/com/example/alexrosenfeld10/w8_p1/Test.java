@@ -11,9 +11,13 @@ public class Test {
     private String dateTaken;
     private int score;
     private String user;
-    private ArrayList<Question> questions;
+    private ArrayList<String> questions;
 
-    public Test(String GUID, String dateTaken, int score, String user, ArrayList<Question> questions) {
+    public Test() {
+        // Required for deserialization
+    }
+
+    public Test(String GUID, String dateTaken, int score, String user, ArrayList<String> questions) {
         this.GUID = GUID;
         this.dateTaken = dateTaken;
         this.score = score;
@@ -47,7 +51,7 @@ public class Test {
         this.user = user;
     }
 
-    public void setQuestions(ArrayList<Question> questions) {
+    public void setQuestions(ArrayList<String> questions) {
         this.questions = questions;
     }
 
@@ -68,7 +72,7 @@ public class Test {
         return user;
     }
 
-    public ArrayList<Question> getQuestions() {
+    public ArrayList<String> getQuestions() {
         return questions;
     }
 }
