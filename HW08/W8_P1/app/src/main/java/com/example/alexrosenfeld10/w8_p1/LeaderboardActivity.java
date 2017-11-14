@@ -28,6 +28,9 @@ public class LeaderboardActivity extends AppCompatActivity {
     TextView txtScore4;
     TextView txtScore5;
 
+    TextView[] names = new TextView[5];
+    TextView[] scores = new TextView[5];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,9 @@ public class LeaderboardActivity extends AppCompatActivity {
         txtScore3 = findViewById(R.id.txtScore3);
         txtScore4 = findViewById(R.id.txtScore4);
         txtScore5 = findViewById(R.id.txtScore5);
+
+        names = new TextView[]{txtName1, txtName2, txtName3, txtName4, txtName5};
+        scores = new TextView[]{txtScore1, txtScore2, txtScore3, txtScore4, txtScore5};
 
         getData();
     }
@@ -63,8 +69,9 @@ public class LeaderboardActivity extends AppCompatActivity {
                 }
 
                 for (int i = 0; i < 5 || i >= data.size(); i++) {
-                    Test currentTest = data.get(i);
-                    //TODO use currentTest.fields to update UI (5 or less times)
+                    Test currentTest = data.get(data.size() - i - 1);
+                    //names[i].setText(currentTest.getUser());
+                    scores[i].setText(Integer.toString(currentTest.getScore()));
                 }
             }
 
